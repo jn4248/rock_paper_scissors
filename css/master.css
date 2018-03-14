@@ -12,7 +12,7 @@ html, body {
 
 #container-main {
   max-width: 800px;
-  padding: 30px;
+  padding: 50px;
   color: #e6e6ff;
 }
 
@@ -23,14 +23,16 @@ html, body {
   border: 2px solid #000000;
   border-radius: 3px;
   display: block;
-  margin: 40px auto;
+  /* margin: 40px auto; */
+  margin-top: 40px;
+  margin-left: 80px;
   padding: 10px;
 }
 
 h1 {
   padding-bottom: 30px;
   color: #ffffff;
-  text-shadow: 5px 5px #000000;
+  text-shadow: 5px 5px 5px #000000;
 }
 
 a {

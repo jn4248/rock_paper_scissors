@@ -1,7 +1,7 @@
 
 
 html, body {
-  /*min-width: 1280px;*/
+  background-color: #4747d1;
 }
 
 * {
@@ -10,7 +10,30 @@ html, body {
 }
 
 
+#container-main {
+  max-width: 800px;
+  padding: 30px;
+  color: #e6e6ff;
+}
 
-/**
-  * Comment
-  */
+#game-start {
+  background-color: #e6e6ff;
+  color: #4747d1;
+  font-weight: bold;
+  border: 2px solid #000000;
+  border-radius: 3px;
+  display: block;
+  margin: 40px auto;
+  padding: 10px;
+}
+
+h1 {
+  padding-bottom: 30px;
+  color: #ffffff;
+  text-shadow: 5px 5px #000000;
+}
+
+a {
+  color: #ffffff;
+  font-weight: bold;
+}

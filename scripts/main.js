@@ -48,9 +48,9 @@ function playRound(playerSelection, computerSelection) {
   if (winCase.includes(playerComputerHand)){
     result = ["player", `You Win! ${playerSelection} beats ${computerSelection}.`];
   } else if (loseCase.includes(playerComputerHand)){
-    result = ["computer", `You Lose! ${playerSelection} is beaten by ${computerSelection}.`];
+    result = ["computer", `You Lose! ${playerSelection} loses to ${computerSelection}.`];
   } else if (tieCase.includes(playerComputerHand)){
-    result = ["tie", `You Tied! ${playerSelection} is the same as ${computerSelection}.\nReplay this round:`];
+    result = ["tie", `We Tied! ${playerSelection} is the same as ${computerSelection}.\nReplay this round:`];
   } else {
     // occurs if  user cancels prompte in playerPlay()
     result = ["cancel", "Player has cancelled the match."];
@@ -172,7 +172,7 @@ function game(numRounds) {
 
 // listener for "start game button".
 // Default is set to run 5 rounds per match.
-var btn = document.querySelector('#game-start');
+var btn = document.querySelector('.button-start');
 btn.addEventListener('click', () => {
   game(5);
 });

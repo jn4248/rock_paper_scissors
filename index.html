@@ -8,19 +8,58 @@
   </head>
 
   <body>
-  <div id="container-main">
-    <h1>Rock Paper Scissors</h1>
-    <p>This version of "Rock Paper Scissors" operates within the developer tools console.</p>
-    <P>To play, please open the developer tools window, and select the "Console" tab (Don't worry, it's easy!.</p>
+    <div class="container-main">
 
-    <p>If you need help, try looking <a href="https://documentation.concrete5.org/tutorials/how-open-browser-console-view-errors">here</a> for information on how to easily access the console window in all major browsers.</p>
+      <h1 class="title-section">Rock Paper Scissors</h1>
+      <div class="container-control">
+        <div class="container-start control-item">
 
-    <p>Once you have the console open, press the button below to start the game.  Please enjoy!</p>
+          <button class="button button-start" type="button" name="button">Start</button>
+        </div>
+        <div class="container-choicelist-rounds control-item">
+            <span>How many rounds would you like to play?</span>
+          <select>
+            <option value="1">1</option>
+            <option value="3">3</option>
+            <option value="5">5</option>
+            <option value="7">7</option>
+            <option value="9">9</option>
+            <option value="11">11</option>
+          </select>
+        </div>
+      </div>
+      <div class="container-control">
+        <div class="container-score control-item">
+          <h3 class="title-section">Score</h3>
+          <table class="scoreboard">
+<!--             <tr>
+              <th>score</th>
+            </tr>
+ -->            <tr>
+              <td>Player:</td>
+              <td>5</td>
+            </tr>
+            <tr>
+              <td>Computer:</td>
+              <td>11</td>
+            </tr>
+          </table>
+        </div>
 
-    <button id="game-start" type="button" name="button">Start Game</button>
+        <div class="container-choicelist-hand control-item">
+          <h4 class="title-section">Players Choice</h4>
+          <button class="button button-choice" type="button" name="button">Rock</button>
+          <button class="button button-choice" type="button" name="button">Paper</button>
+          <button class="button button-choice" type="button" name="button">Scissors</button>
+        </div>
+      </div>
 
+      <div class="TO-DELETE" height="800px" width="800px">
+          <h3 class="title-section">Match Results</h3>
+          <p>You Win! Rock beats Paper...yay!!!!</p>
+      </div>
 
+    </div>
     <script src="scripts/main.js"></script>
-  </div>
   </body>
 </html>

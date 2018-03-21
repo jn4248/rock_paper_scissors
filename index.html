@@ -17,10 +17,10 @@
           <button class="button button-start" type="button" name="button">Start</button>
         </div>
         <div class="container-choicelist-rounds control-item">
-            <span>How many rounds would you like to play?</span>
-          <select>
+            <span>Set number of rounds in the next match:</span>
+          <select id="selectRounds" name="rounds">
             <option value="1">1</option>
-            <option value="3">3</option>
+            <option value="3" selected>3</option>
             <option value="5">5</option>
             <option value="7">7</option>
             <option value="9">9</option>
@@ -32,10 +32,7 @@
         <div class="container-score control-item">
           <h3 class="title-section">Score</h3>
           <table class="scoreboard">
-<!--             <tr>
-              <th>score</th>
-            </tr>
- -->            <tr>
+            <tr>
               <td>Player:</td>
               <td>5</td>
             </tr>
@@ -54,7 +51,7 @@
         </div>
       </div>
 
-      <div class="TO-DELETE" height="800px" width="800px">
+      <div id="gamelog">
           <h3 class="title-section">Match Results</h3>
           <p>You Win! Rock beats Paper...yay!!!!</p>
       </div>

@@ -170,9 +170,40 @@ function game(numRounds) {
   }
 }
 
+
+
+
+function getNumberRounds() {
+  let roundSelectMenu = document.querySelector("#selectRounds");
+  let numberRounds = roundSelectMenu.value;
+  console.log("Inside getNumberRounds()");
+  console.log(".value = " + numberRounds);
+  return numberRounds;
+}
+
+// let items = document.querySelectorAll(".show-rounds");
+// // items.forEach( item => item.classList.toggle("show-rounds"));
+// items.forEach(function(item) {
+//   item.classList.toggle("show-rounds");
+// });
+
+
+// listener for select menu to choose number of rounds in a matche
+// let roundselectMenu = document.querySelector("#selectRounds");
+// roundselectMenu.addEventListener('change', function(e) {
+//   console.log("ran selectRounds()...event info:");
+//   console.log(e);
+//   console.log("value = " + e.target.value);
+//   console.log("selectedIndex = " + e.target.selectedIndex);
+//   numRounds = e.value;
+// });
+
+
+
 // listener for "start game button".
 // Default is set to run 5 rounds per match.
-var btn = document.querySelector('.button-start');
-btn.addEventListener('click', () => {
-  game(5);
+let startButton = document.querySelector('.button-start');
+startButton.addEventListener('click', () => {
+  numberRounds = getNumberRounds();
+  game(numberRounds);
 });

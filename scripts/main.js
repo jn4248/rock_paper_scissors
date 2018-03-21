@@ -1,4 +1,9 @@
 
+// element where printToGameLog(message) will add in-game update messages
+const gameLog = document.querySelector("#gameLog");
+const playerScoreBoard = document.querySelector("#playerScoreBoard");
+const computerScoreBoard = document.querySelector("#computerScoreBoard");
+
 // Request user to inut one of three play choices "ROCK", "PAPER", or
 // "SCISSORS".  Format the choice to all capital letters before returning.
 function playerPlay() {
@@ -72,6 +77,13 @@ function reportWinnerStatus(numRounds, playerScore, computerScore) {
   return winner;
 }
 
+// update the score on the html scoreboard
+function updateScoreBoard(playerScore, computerScore) {
+  playerScoreBoard.textContent = playerScore;
+  computerScoreBoard.textContent = computerScore;
+}
+
+// return a string showing the score
 function scoreMessage(playerScore, computerScore) {
   return `Score: Player: ${playerScore} Computer: ${computerScore}`;
 }
@@ -93,15 +105,34 @@ function playAgain() {
   }
 }
 
-// sectino divider for clarity in console output
+// section divider for clarity in console output
 function displayHorizontalRule() {
-  console.log("___________________________________________");
+  horizontalLine = document.createElement("hr");
+  gameLog.appendChild(horizontalLine);
+}
+
+// remove all child elements of the gamelog
+function clearGameLog() {
+  while (gameLog.hasChildNodes()) {
+      gameLog.removeChild(gameLog.lastChild);
+  }
+}
+
+// returns true if no log messages (p elements) exist on the gameLog element.
+// returns false if none exist.
+function isFirstGame() {
+  console.log("isFirstGame(): gameLog querySelector(p) = " + gameLog.querySelectorAll("p").length);
+  let pCount = gameLog.querySelectorAll("p").length;
+  if (gameLog.querySelectorAll("p").length > 0) {
+    return false;
+  } else {
+    return true;
+  }
 }
 
 // Run a match, with the number of rounds set by variable numRounds.
 // Continues running additional matches unless user selects "N" at prompt.
 function game(numRounds) {
-  console.log("Let's play a game of 'Rock Paper Scissors'.");
   let continueGame = true;
   let continueRound = true;
   let playerScore = 0;
@@ -111,18 +142,23 @@ function game(numRounds) {
   let result;  // round result (array) returned from playRound()
   let matchWinner = reportWinnerStatus(numRounds, playerScore, computerScore);
   while (continueGame) {
-    console.log(`Best out of ${numRounds} rounds wins the match!`);
-    console.log("We start with...");
-    console.log(scoreMessage(playerScore, computerScore));
+    // clear the game log of messages if a game has already been played
+    if (!isFirstGame()) {
+      clearGameLog();
+      updateScoreBoard(playerScore, computerScore);
+    }
+    printToGameLog("Let's play a game of 'Rock Paper Scissors'.");
+    printToGameLog(`Best out of ${numRounds} rounds wins the match!`);
+    printToGameLog(scoreMessage(playerScore, computerScore));
     displayHorizontalRule();
     // Round of Play
     for (let i = 1; i < numRounds + 1; i++) {
-      console.log(`Round ${i}:`);
+      printToGameLog(`Round ${i}:`);
       while (continueRound) {
         playerChoice = playerPlay();
         computerChoice = computerPlay();
         result = playRound(playerChoice, computerChoice);
-        console.log(result[1]); // display the hand outcome
+        printToGameLog(result[1]);
         if (result[0] != "tie") {
           continueRound = false;
         }
@@ -141,7 +177,8 @@ function game(numRounds) {
       } else if (result[0] == "computer") {
         computerScore += 1;
       }
-      console.log(scoreMessage(playerScore, computerScore));
+      // printToGameLog(scoreMessage(playerScore, computerScore));
+      updateScoreBoard(playerScore, computerScore);
       displayHorizontalRule();
       // declare winner if one party has majority of rounds won.
       matchWinner = reportWinnerStatus(numRounds, playerScore, computerScore);
@@ -150,28 +187,34 @@ function game(numRounds) {
       }
     }
     // end of match...show outcome
-    console.log(`Match Over...${matchWinner[1]} Wins!`);
+    printToGameLog(`Match Over...${matchWinner[1]} Wins!`);
     displayHorizontalRule();
 
     // Prompt player to play again or not.
     let playAnotherMatch = playAgain();
     if (playAnotherMatch == true) {
-      console.log("Great! I'll prepare a new match...");
+      printToGameLog("Great! I'll prepare a new match...");
       // reset game variables
       playerScore = 0;
       computerScore = 0;
       matchWinner = [false, "Nobody"];
     } else {
       continueGame = false;
-      console.log("Thank you for playing. Goodbye...");
-      console.log("If you wish to play again, please refresh this page,");
-      console.log("or click the 'Start-Game' button.");
+      printToGameLog("Thanks for playing. Goodbye...");
+      printToGameLog("If you wish to play again, click the 'start' button. (Adjust the number of rounds before clicking 'start', if desired)");
     }
   }
 }
 
-
-
+// add a message to the end of the gamelog
+function printToGameLog(message) {
+  // let gameLog = document.querySelector("gameLog");
+  let p = document.createElement('p');
+  p.textContent = message;
+  gameLog.appendChild(p);
+  // force scroll bar to bottom to show latest update
+  gameLog.scrollTop = gameLog.scrollHeight;
+}
 
 function getNumberRounds() {
   let roundSelectMenu = document.querySelector("#selectRounds");

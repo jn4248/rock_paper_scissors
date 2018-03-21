@@ -105,6 +105,19 @@ html, body {
   margin: 1rem 0;
 }
 
+.container-gamelog {
+  border: 2px solid red;
+}
+
+.container-gamelog p {
+  font-size: .750rem;
+}
+
+#gameLog {
+  max-height: 20rem;
+  overflow: auto;
+}
+
 .hide {
   display: none;
 }

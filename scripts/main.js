@@ -1,8 +1,8 @@
 
 // element where printToGameLog(message) will add in-game update messages
-const gameLog = document.querySelector("#gameLog");
-const playerScoreBoard = document.querySelector("#playerScoreBoard");
-const computerScoreBoard = document.querySelector("#computerScoreBoard");
+const gameLog = document.querySelector('#gameLog');
+const playerScoreBoard = document.querySelector('#playerScoreBoard');
+const computerScoreBoard = document.querySelector('#computerScoreBoard');
 
 // Request user to inut one of three play choices "ROCK", "PAPER", or
 // "SCISSORS".  Format the choice to all capital letters before returning.
@@ -107,7 +107,7 @@ function playAgain() {
 
 // section divider for clarity in console output
 function displayHorizontalRule() {
-  horizontalLine = document.createElement("hr");
+  horizontalLine = document.createElement('hr');
   gameLog.appendChild(horizontalLine);
 }
 
@@ -200,8 +200,8 @@ function game(numRounds) {
       matchWinner = [false, "Nobody"];
     } else {
       continueGame = false;
-      printToGameLog("Thanks for playing. Goodbye...");
-      printToGameLog("If you wish to play again, click the 'start' button. (Adjust the number of rounds before clicking 'start', if desired)");
+      printToGameLog("Thanks for playing!");
+      printToGameLog("Click the 'start' button to play again. (If desirec, adjust the number of rounds first)");
     }
   }
 }
@@ -217,36 +217,59 @@ function printToGameLog(message) {
 }
 
 function getNumberRounds() {
-  let roundSelectMenu = document.querySelector("#selectRounds");
+  let roundSelectMenu = document.querySelector('#selectRounds');
   let numberRounds = roundSelectMenu.value;
   console.log("Inside getNumberRounds()");
   console.log(".value = " + numberRounds);
   return numberRounds;
 }
 
-// let items = document.querySelectorAll(".show-rounds");
-// // items.forEach( item => item.classList.toggle("show-rounds"));
-// items.forEach(function(item) {
-//   item.classList.toggle("show-rounds");
-// });
-
-
-// listener for select menu to choose number of rounds in a matche
-// let roundselectMenu = document.querySelector("#selectRounds");
-// roundselectMenu.addEventListener('change', function(e) {
-//   console.log("ran selectRounds()...event info:");
-//   console.log(e);
-//   console.log("value = " + e.target.value);
-//   console.log("selectedIndex = " + e.target.selectedIndex);
-//   numRounds = e.value;
-// });
 
 
 
 // listener for "start game button".
 // Default is set to run 5 rounds per match.
-let startButton = document.querySelector('.button-start');
-startButton.addEventListener('click', () => {
+let startButton = document.querySelector('#buttonStart');
+startButton.addEventListener('click', function() {
   numberRounds = getNumberRounds();
   game(numberRounds);
 });
+
+function toggleInstructions() {
+  console.log(" ");
+  console.log("Started toggleInstructions");
+  let container = document.querySelector('.container-instructions');
+  let items = container.children;
+  let hidden = container.classList.contains('hide');
+  console.log("Hidden created: " + hidden);
+  console.log("Number of instruction items: " + items.length);
+  // console.log(items);
+  // console.log("items print done");
+  if (hidden) {
+    console.log("ran IF: hidden = " + hidden);
+    // show instructions
+    container.classList.remove('hide');
+    // wrap class changes in setTimeout(), because they occur just after changing from a state of display:none (class 'hide')
+    window.setTimeout(function(){
+      container.classList.toggle('slide-down');
+      for (let i=0; i < items.length; i++) {
+        items[i].classList.toggle('opacity-full');
+      }
+    }, 10);
+  } else {
+    console.log("ran else: hidden = " + hidden);
+    // remove/hide instructions
+    for (let i=0; i < items.length; i++) {
+      items[i].classList.toggle('opacity-full');
+    }
+    container.classList.toggle('slide-down');
+    // set timer length to wait for transitions set in class "container-instructions"
+    window.setTimeout(function(){container.classList.add('hide');}, 2100);
+  }
+  console.log("End toggleInstructions.  hidden = " + hidden);
+}
+
+
+
+let instructionsButton = document.querySelector('#buttonInstructions');
+instructionsButton.addEventListener('click', toggleInstructions);

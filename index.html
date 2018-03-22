@@ -8,15 +8,17 @@
   </head>
 
   <body>
-    <div class="container-main">
+    <div class="container-main red-box">
 
       <h1 class="title-section">Rock Paper Scissors</h1>
       <div class="container-control">
-        <div class="container-start control-item">
 
-          <button class="button button-start" type="button" name="button">Start</button>
+        <div class="container-start control-item red-box">
+          <button id="buttonStart" class="button button-start" type="button" name="start">Start</button>
+          <button id="buttonCancel" class="button button-exit" type="button" name="cancel">Cancel</button>
         </div>
-        <div class="container-choicelist-rounds control-item">
+
+        <div class="container-choicelist-rounds control-item red-box">
             <span>Set number of rounds in the next match:</span>
           <select id="selectRounds" name="rounds">
             <option value="1">1</option>
@@ -28,8 +30,9 @@
           </select>
         </div>
       </div>
+
       <div class="container-control">
-        <div class="container-score control-item">
+        <div class="container-score control-item red-box">
           <h3 class="title-section">Score</h3>
           <table class="scoreboard">
             <tr>
@@ -41,17 +44,26 @@
               <td id="computerScoreBoard">0</td>
             </tr>
           </table>
+          <button id="buttonInstructions" class="button button-instructions" type="button" name="instructions">Instructions</button>
         </div>
 
-        <div class="container-choicelist-hand control-item">
+        <div class="container-choicelist-hand control-item red-box">
           <h4 class="title-section">Players Choice</h4>
-          <button class="button button-choice" type="button" name="button">Rock</button>
-          <button class="button button-choice" type="button" name="button">Paper</button>
-          <button class="button button-choice" type="button" name="button">Scissors</button>
+          <button id="buttonRock" class="button button-choice" type="button" name="rock">Rock</button>
+          <button id="buttonPaper" class="button button-choice" type="button" name="paper">Paper</button>
+          <button id="buttonScissors" class="button button-choice" type="button" name="scissors">Scissors</button>
         </div>
       </div>
 
-      <div class="container-gamelog">
+      <div class="container-instructions hide">
+        <h3 class="title-section">Instructions</h3>
+        <p>This is where the instructions will be.</p>
+        <p>There will be multiple paragraphs.</p>
+        <p>And one more just to test things.</p>
+
+      </div>
+
+      <div class="container-gamelog red-box">
         <h3 class="title-section">Match Log</h3>
         <hr>
         <div id="gameLog">

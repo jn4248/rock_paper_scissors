@@ -6,17 +6,16 @@ html, body {
 
 * {
   box-sizing: border-box;
-  /* border: 1px solid lawngreen; */
+  border: 2px solid lawngreen;
 
 }
 
 
 .container-main {
-  border: 2px solid red;
   background-color: #4747d1;
   max-width: 35rem;
   min-width: 30rem;
-  padding: 0 3.5rem;
+  padding: 0.75rem 3.5rem;
   color: #e6e6ff;
   margin: 3rem;
   /* border-radius: 12.5rem; */
@@ -24,7 +23,7 @@ html, body {
 }
 
 .container-control {
-  /* padding-top: 1em; */
+  padding-bottom: 1.5em;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
@@ -37,41 +36,30 @@ html, body {
 }
 
 .container-start {
-  border: 2px solid red;
   display: flex;
-  flex-flow: column nowrap;
+  flex-flow: row nowrap;
+  justify-content: space-around;
   align-items: center;
 }
 
-.container-score {
-  border: 2px solid red;
+.container-score,
+.container-choicelist-hand {
   display: flex;
   flex-flow: column nowrap;
   align-items: center;
+  justify-content: space-between;
 }
 
 .container-choicelist-rounds {
-  border: 2px solid red;
   font-size: 0.75rem;
   display: flex;
   flex-flow: row nowrap;
   /* justify-content: space-between; */
   align-items: stretch;
-
-}
-
-.container-choicelist-hand {
-   border: 2px solid red;
-   display: flex;
-   flex-flow: column nowrap;
-   align-items: center;
-   justify-content: space-around;
-
+  text-align: center;
 }
 
 .scoreboard {
-  /* padding: 0.5rem; */
-  /* height: 6rem; */
 }
 
 .scoreboard td {
@@ -79,11 +67,43 @@ html, body {
   font-weight: bold;
 }
 
+.container-instructions {
+  background-color: lightblue;
+  height: 0;
+  -moz-transition: height 2s;
+  -webkit-transition: height 2s;
+  -ms-transition: height 2s;
+  -o-transition: height 2s;
+  transition: height 2s;
+}
+
+/* All elements on the instructions container div */
+.container-instructions * {
+  opacity: 0;
+  -webkit-transition: opacity 1.5s ease-in;
+  -moz-transition: opacity 1.5s ease-in;
+  -o-transition: opacity 1.5s ease-in;
+  -ms-transition: opacity 1.5s ease-in;
+  transition: opacity 1.5s ease-in;
+}
+
+.container-gamelog {
+}
+
+.container-gamelog p {
+  font-size: .750rem;
+}
+
+.gamelog {
+  max-height: 20rem;
+  overflow: auto;
+}
 
 .button {
+  font-size: 0.85rem;
   font-weight: bold;
-  width: 6rem;
-  height: 2rem;
+  width: 5rem;
+  height: 1.75rem;
   /* padding: 1rem 1rem; */
   /* margin: 0.25rem 0; */
   border-radius: 1rem;
@@ -93,8 +113,17 @@ html, body {
 .button-start {
 }
 
+.button-cancel {
+
+}
+
+.button-instructions {
+  width: 8rem;
+  margin-top: 2rem;
+}
+
 .button-choice {
-  margin-bottom: 0.5rem;
+  margin-top: 0.75rem;
 }
 
 
@@ -102,22 +131,22 @@ html, body {
   color: #ffffff;
   text-shadow: 5px 5px 5px #000000;
   text-align: center;
-  margin: 1rem 0;
+  margin: 0 0 1rem;
 }
 
-.container-gamelog {
-  border: 2px solid red;
-}
-
-.container-gamelog p {
-  font-size: .750rem;
-}
-
-#gameLog {
-  max-height: 20rem;
-  overflow: auto;
-}
 
 .hide {
   display: none;
+}
+
+.red-box {
+  /* border: 2px solid red; */
+}
+
+.slide-down {
+  height: 15rem;
+}
+
+.opacity-full {
+  opacity: 1;
 }

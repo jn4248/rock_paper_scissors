@@ -1,8 +1,11 @@
 
 // element where printToGameLog(message) will add in-game update messages
-const gameLog = document.querySelector('#gameLog');
-const playerScoreBoard = document.querySelector('#playerScoreBoard');
-const computerScoreBoard = document.querySelector('#computerScoreBoard');
+const gameLog = document.getElementById('gameLog');
+const playerScoreBoard = document.getElementById('playerScoreBoard');
+const computerScoreBoard = document.getElementById('computerScoreBoard');
+
+
+/* // OLD VERSION - FOR console
 
 // Request user to inut one of three play choices "ROCK", "PAPER", or
 // "SCISSORS".  Format the choice to all capital letters before returning.
@@ -25,6 +28,11 @@ function playerPlay() {
   } else {
     return "CANCEL";  // (user cancelled prompt)
   }
+}
+*/
+
+function playerPlay() {
+
 }
 
 // Randomly return one of three play choices (formatted in capital letters)
@@ -121,7 +129,6 @@ function clearGameLog() {
 // returns true if no log messages (p elements) exist on the gameLog element.
 // returns false if none exist.
 function isFirstGame() {
-  console.log("isFirstGame(): gameLog querySelector(p) = " + gameLog.querySelectorAll("p").length);
   let pCount = gameLog.querySelectorAll("p").length;
   if (gameLog.querySelectorAll("p").length > 0) {
     return false;
@@ -208,7 +215,6 @@ function game(numRounds) {
 
 // add a message to the end of the gamelog
 function printToGameLog(message) {
-  // let gameLog = document.querySelector("gameLog");
   let p = document.createElement('p');
   p.textContent = message;
   gameLog.appendChild(p);
@@ -217,7 +223,7 @@ function printToGameLog(message) {
 }
 
 function getNumberRounds() {
-  let roundSelectMenu = document.querySelector('#selectRounds');
+  let roundSelectMenu = document.getElementById('selectRounds');
   let numberRounds = roundSelectMenu.value;
   console.log("Inside getNumberRounds()");
   console.log(".value = " + numberRounds);
@@ -229,47 +235,39 @@ function getNumberRounds() {
 
 // listener for "start game button".
 // Default is set to run 5 rounds per match.
-let startButton = document.querySelector('#buttonStart');
+let startButton = document.getElementById('buttonStart');
 startButton.addEventListener('click', function() {
   numberRounds = getNumberRounds();
   game(numberRounds);
 });
 
+
 function toggleInstructions() {
-  console.log(" ");
-  console.log("Started toggleInstructions");
   let container = document.querySelector('.container-instructions');
   let items = container.children;
   let hidden = container.classList.contains('hide');
-  console.log("Hidden created: " + hidden);
-  console.log("Number of instruction items: " + items.length);
-  // console.log(items);
-  // console.log("items print done");
   if (hidden) {
-    console.log("ran IF: hidden = " + hidden);
     // show instructions
     container.classList.remove('hide');
     // wrap class changes in setTimeout(), because they occur just after changing from a state of display:none (class 'hide')
     window.setTimeout(function(){
-      container.classList.toggle('slide-down');
+      container.classList.add('slide-down');
       for (let i=0; i < items.length; i++) {
-        items[i].classList.toggle('opacity-full');
+        items[i].classList.add('opacity-full');
       }
     }, 10);
   } else {
-    console.log("ran else: hidden = " + hidden);
     // remove/hide instructions
     for (let i=0; i < items.length; i++) {
-      items[i].classList.toggle('opacity-full');
+      items[i].classList.remove('opacity-full');
     }
-    container.classList.toggle('slide-down');
+    container.classList.remove('slide-down');
     // set timer length to wait for transitions set in class "container-instructions"
-    window.setTimeout(function(){container.classList.add('hide');}, 2100);
+    window.setTimeout(function(){container.classList.add('hide');}, 1050);
   }
-  console.log("End toggleInstructions.  hidden = " + hidden);
 }
 
 
 
-let instructionsButton = document.querySelector('#buttonInstructions');
-instructionsButton.addEventListener('click', toggleInstructions);
+let instructionsButton = document.getElementById('buttonInstructions');
+instructionsButton.addEventListener('click', toggleInstructions(e));

@@ -70,21 +70,21 @@ html, body {
 .container-instructions {
   background-color: lightblue;
   height: 0;
-  -moz-transition: height 2s;
-  -webkit-transition: height 2s;
-  -ms-transition: height 2s;
-  -o-transition: height 2s;
-  transition: height 2s;
+  -moz-transition: height 1s;
+  -webkit-transition: height 1s;
+  -ms-transition: height 1s;
+  -o-transition: height 1s;
+  transition: height 1s;
 }
 
 /* All elements on the instructions container div */
 .container-instructions * {
   opacity: 0;
-  -webkit-transition: opacity 1.5s ease-in;
-  -moz-transition: opacity 1.5s ease-in;
-  -o-transition: opacity 1.5s ease-in;
-  -ms-transition: opacity 1.5s ease-in;
-  transition: opacity 1.5s ease-in;
+  -webkit-transition: opacity 0.5s ease-in;
+  -moz-transition: opacity 0.5s ease-in;
+  -o-transition: opacity 0.5s ease-in;
+  -ms-transition: opacity 0.5s ease-in;
+  transition: opacity 0.5s ease-in;
 }
 
 .container-gamelog {

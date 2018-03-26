@@ -1,42 +1,61 @@
 
+
+let playerHand = "NONE";   // rock,paper,scissors, none
+let computerHand = "NONE";  // rock,paper,scissors, none
+let playerScore = 0;
+let computerScore = 0;
+let gameOver = false;
+
 // element where printToGameLog(message) will add in-game update messages
 const gameLog = document.getElementById('gameLog');
 const playerScoreBoard = document.getElementById('playerScoreBoard');
 const computerScoreBoard = document.getElementById('computerScoreBoard');
 
+// listener for "Start Game Button".
+const startButton = document.getElementById('buttonStart');
+startButton.addEventListener('click', function() {
+  numberRounds = getNumberRounds();
+  playGame(numberRounds);
+});
 
-/* // OLD VERSION - FOR console
+// listener for "Cancel Button".
+const cancelButton = document.getElementById('buttonCancel');
+cancelButton.addEventListener('click', function() {
+});
 
-// Request user to inut one of three play choices "ROCK", "PAPER", or
-// "SCISSORS".  Format the choice to all capital letters before returning.
-function playerPlay() {
-  let acceptableChoice = ["R", "P", "S", null];
-  let playerHand;
-  // prompt player, while screening out unacceptable answers
-  do {
-    playerHand =  window.prompt("Please make your selection by typing either 'R' for Rock,' 'P' for 'Paper,' or 'S' for 'Scissors'.\n(Pressing 'Cancel' will end the match.)");
-    if (playerHand != null) {
-      playerHand = playerHand.slice(0,1).toUpperCase();
-    }
-  } while (!acceptableChoice.includes(playerHand));
-  if (playerHand == "R"){
-    return "ROCK";
-  } else if (playerHand == "P") {
-    return "PAPER";
-  } else if (playerHand == "S") {
-    return "SCISSORS";
-  } else {
-    return "CANCEL";  // (user cancelled prompt)
-  }
+// listener for "Rock Button".
+const rockButton = document.getElementById('buttonRock');
+rockButton.addEventListener('click', function() {
+  setPlayerHand("ROCK");
+});
+
+// listener for "Paper Button".
+const paperButton = document.getElementById('buttonPaper');
+paperButton.addEventListener('click', function() {
+  setPlayerHand("PAPER");
+});
+
+// listener for "Scissors Button".
+const scissorsButton = document.getElementById('buttonScissors');
+scissorsButton.addEventListener('click', function() {
+  setPlayerHand("SCISSORS");
+});
+
+// listener for "Instructions Button"
+const instructionsButton = document.getElementById('buttonInstructions');
+instructionsButton.addEventListener('click', toggleInstructions);
+
+
+function setPlayerHand(hand) {
+  playerHand = hand;
 }
-*/
 
-function playerPlay() {
-
+function resetPlayerHand() {
+  playerhand = "NONE"
 }
 
 // Randomly return one of three play choices (formatted in capital letters)
-function computerPlay() {
+function setComputerHand() {
   let randomToHundred = Math.floor((Math.random() * 100) + 1); // 1 through 100
   if (randomToHundred <= 33) {
    return "ROCK";
@@ -52,18 +71,18 @@ function computerPlay() {
 // The Choices must be preformatted in all capital letters.
 // Returns array of 2 strings: the winner or "tie", and the
 // message to display the outcome of the round.
-function playRound(playerSelection, computerSelection) {
-  let playerComputerHand = `${playerSelection} ${computerSelection}`;
+function determineRoundWinner() {
+  let combinedHands = `${playerHand} ${computerHand}`;
   let winCase = ["PAPER ROCK", "ROCK SCISSORS", "SCISSORS PAPER"];
   let loseCase = ["ROCK PAPER", "SCISSORS ROCK", "PAPER SCISSORS"];
   let tieCase = ["ROCK ROCK", "PAPER PAPER", "SCISSORS SCISSORS"];
   let result = [];
-  if (winCase.includes(playerComputerHand)){
-    result = ["player", `You Win! ${playerSelection} beats ${computerSelection}.`];
-  } else if (loseCase.includes(playerComputerHand)){
-    result = ["computer", `You Lose! ${playerSelection} loses to ${computerSelection}.`];
-  } else if (tieCase.includes(playerComputerHand)){
-    result = ["tie", `We Tied! ${playerSelection} is the same as ${computerSelection}.\nReplay this round:`];
+  if (winCase.includes(combinedHands)){
+    result = ["player", `You Win! ${playerHand} beats ${computerHand}.`];
+  } else if (loseCase.includes(combinedHands)){
+    result = ["computer", `You Lose! ${playerHand} loses to ${computerHand}.`];
+  } else if (tieCase.includes(combinedHands)){
+    result = ["tie", `We Tied! ${playerHand} is the same as ${computerHand}.\nReplay this round:`];
   } else {
     // occurs if  user cancels prompte in playerPlay()
     result = ["cancel", "Player has cancelled the match."];
@@ -74,7 +93,7 @@ function playRound(playerSelection, computerSelection) {
 // returns 2 item array: [true/false, "player"/"computer"/"none]
 // position 0 indicates if a winner exists, position 1 is who won.
 // Different consideration if number of rounds is even or odd.
-function reportWinnerStatus(numRounds, playerScore, computerScore) {
+function reportWinnerStatus(numRounds) {
   winner = [false, "Nobody"];
   let majorityToWin = Math.floor(numRounds/2) + 1;
   if (playerScore >= majorityToWin){
@@ -83,34 +102,6 @@ function reportWinnerStatus(numRounds, playerScore, computerScore) {
     winner= [true, "Computer"];
   }
   return winner;
-}
-
-// update the score on the html scoreboard
-function updateScoreBoard(playerScore, computerScore) {
-  playerScoreBoard.textContent = playerScore;
-  computerScoreBoard.textContent = computerScore;
-}
-
-// return a string showing the score
-function scoreMessage(playerScore, computerScore) {
-  return `Score: Player: ${playerScore} Computer: ${computerScore}`;
-}
-
-// returns true if player wants to play again.
-function playAgain() {
-  let acceptableAnswer = ["y", "Y", "n", "N", null];
-  let continueOptions = ["y", "Y"];
-  let playerAnswer;
-  // prompt player, while screening out unacceptable answers
-  do {
-    playerAnswer =  window.prompt("Would you like to play another match? ('Y' or 'N').\n(Pressing 'Cancel' will also end the game.)");
-  } while (!acceptableAnswer.includes(playerAnswer));
-
-  if (continueOptions.includes(playerAnswer)) {
-    return true;
-  } else {
-    return false;
-  }
 }
 
 // section divider for clarity in console output
@@ -126,92 +117,101 @@ function clearGameLog() {
   }
 }
 
-// returns true if no log messages (p elements) exist on the gameLog element.
-// returns false if none exist.
-function isFirstGame() {
-  let pCount = gameLog.querySelectorAll("p").length;
-  if (gameLog.querySelectorAll("p").length > 0) {
-    return false;
-  } else {
-    return true;
+
+// update the html scoreboard with the current score
+function updateScoreBoard() {
+  playerScoreBoard.textContent = playerScore;
+  computerScoreBoard.textContent = computerScore;
+}
+
+// update scores after a round is won
+function updateScore(winner) {
+  if (winner == "player") {
+    playerScore++;
+  } else if (winner == "computer") {
+    computerScore++;
+  }
+  updateScoreBoard();
+}
+
+// runs one round, and returns the winner ("Player" or "Computer") or "Cancel"
+function playRound() {
+  printToGameLog("Players turn. Please select your hand:");
+  let result = [];  // from determineRoundWinner()
+  let count = 0;
+  let isTie = true;
+  resetPlayerHand();
+  // repeat round if result is a tie
+  while (isTie) {
+    // wait for user to select a button: rock, paper, scissors, or cancel
+    while(playerHand == "NONE") {
+      setTimeout(remindPlayer(count), 200);
+      count++
+    }
+    computerHand = setComputerPlay();
+    result = determineRoundWinner();
+    printToGameLog(result[1]);
+    // exit if not a tie round
+    if (result[0] != "tie") {
+      isTie = false;
+    }
+    // leave the round if player clicks "cancel"
+    // if (result[0] == "cancel") {
+    //   displayHorizontalRule();
+    //   break;
+    // }
+  }
+  return result[0];
+}
+
+function remindPlayer(count) {
+  // console.log("Player = " + playerHand);
+  if (count % 25 == 0) {
+    printToGameLog("Hey, I'm waiting for you! Please select a hand:");
+    console.log("HEY, I'M WAITING FOR YOU!!!!!!");
   }
 }
 
-// Run a match, with the number of rounds set by variable numRounds.
-// Continues running additional matches unless user selects "N" at prompt.
-function game(numRounds) {
-  let continueGame = true;
-  let continueRound = true;
+function playGame(numRounds) {
+  let gameOver = false;
   let playerScore = 0;
   let computerScore = 0;
-  let playerChoice;    // rock,paper,scissors
-  let computerChoice;  // rock,paper,scissors
-  let result;  // round result (array) returned from playRound()
-  let matchWinner = reportWinnerStatus(numRounds, playerScore, computerScore);
-  while (continueGame) {
-    // clear the game log of messages if a game has already been played
-    if (!isFirstGame()) {
-      clearGameLog();
-      updateScoreBoard(playerScore, computerScore);
-    }
-    printToGameLog("Let's play a game of 'Rock Paper Scissors'.");
-    printToGameLog(`Best out of ${numRounds} rounds wins the match!`);
-    printToGameLog(scoreMessage(playerScore, computerScore));
-    displayHorizontalRule();
-    // Round of Play
-    for (let i = 1; i < numRounds + 1; i++) {
-      printToGameLog(`Round ${i}:`);
-      while (continueRound) {
-        playerChoice = playerPlay();
-        computerChoice = computerPlay();
-        result = playRound(playerChoice, computerChoice);
-        printToGameLog(result[1]);
-        if (result[0] != "tie") {
-          continueRound = false;
-        }
-      }
-      // reset while loop parameter before break sequences, in case play again
-      continueRound = true;
+  let matchWinner = reportWinnerStatus(numRounds); // initiate to default
+  // clear the game log of messages if a game has already been played
+  clearGameLog();
+  updateScoreBoard();
+  // start game
+  printToGameLog("Let's play a game of 'Rock Paper Scissors'.");
+  printToGameLog(`Best out of ${numRounds} rounds wins the match!`);
+  displayHorizontalRule();
 
-      // leave the match if player cancelled at playRound() prompt
-      if (result[0] == "cancel") {
-        displayHorizontalRule();
-        break;
-      }
-      //round won: update and show score, and reset tie tracking variable
-      if (result[0] == "player") {
-        playerScore += 1;
-      } else if (result[0] == "computer") {
-        computerScore += 1;
-      }
-      // printToGameLog(scoreMessage(playerScore, computerScore));
-      updateScoreBoard(playerScore, computerScore);
+  // Rounds of Play
+  for (let i = 1; i < numRounds + 1; i++) {
+    printToGameLog(`Round ${i}:`);
+    roundWinner = playRound();
+
+    // leave  match if player clicks "cancel"
+    if (roundWinner == "cancel") {
       displayHorizontalRule();
-      // declare winner if one party has majority of rounds won.
-      matchWinner = reportWinnerStatus(numRounds, playerScore, computerScore);
-      if (matchWinner[0] == true) {
-        break;
-      }
+      break;
     }
-    // end of match...show outcome
-    printToGameLog(`Match Over...${matchWinner[1]} Wins!`);
+    //round won: updatescore
+    updateScore();
     displayHorizontalRule();
-
-    // Prompt player to play again or not.
-    let playAnotherMatch = playAgain();
-    if (playAnotherMatch == true) {
-      printToGameLog("Great! I'll prepare a new match...");
-      // reset game variables
-      playerScore = 0;
-      computerScore = 0;
-      matchWinner = [false, "Nobody"];
-    } else {
-      continueGame = false;
-      printToGameLog("Thanks for playing!");
-      printToGameLog("Click the 'start' button to play again. (If desirec, adjust the number of rounds first)");
+    // declare winner if one party has majority of rounds won.
+    matchWinner = reportWinnerStatus(numRounds);
+    if (matchWinner[0] == true) {
+      break;
     }
   }
+
+  // end of match...show outcome
+  printToGameLog(`Match Over...${matchWinner[1]} Wins!`);
+  displayHorizontalRule();
+  printToGameLog("Thanks for playing!");
+  printToGameLog("Click the 'start' button to play again. (If desirec, adjust the number of rounds first)");
 }
+
 
 // add a message to the end of the gamelog
 function printToGameLog(message) {
@@ -231,15 +231,6 @@ function getNumberRounds() {
 }
 
 
-
-
-// listener for "start game button".
-// Default is set to run 5 rounds per match.
-let startButton = document.getElementById('buttonStart');
-startButton.addEventListener('click', function() {
-  numberRounds = getNumberRounds();
-  game(numberRounds);
-});
 
 
 function toggleInstructions() {
@@ -266,8 +257,3 @@ function toggleInstructions() {
     window.setTimeout(function(){container.classList.add('hide');}, 1050);
   }
 }
-
-
-
-let instructionsButton = document.getElementById('buttonInstructions');
-instructionsButton.addEventListener('click', toggleInstructions(e));

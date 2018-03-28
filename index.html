@@ -10,7 +10,7 @@
   <body>
     <div class="container-main red-box">
 
-      <h1 class="title-section">Rock Paper Scissors</h1>
+      <h1 class="title title-main">Rock Paper Scissors</h1>
       <div class="container-control">
 
         <div class="container-start control-item red-box">
@@ -19,7 +19,7 @@
         </div>
 
         <div class="container-choicelist-rounds control-item red-box">
-            <span>Set number of rounds in the next match:</span>
+          <span>Set number of rounds in the next match:</span>
           <select id="selectRounds" name="rounds">
             <option value="1">1</option>
             <option value="3" selected>3</option>
@@ -33,7 +33,7 @@
 
       <div class="container-control">
         <div class="container-score control-item red-box">
-          <h3 class="title-section">Score</h3>
+          <h3 class="title">Score</h3>
           <table class="scoreboard">
             <tr>
               <td>Player:</td>
@@ -48,7 +48,7 @@
         </div>
 
         <div class="container-choicelist-hand control-item red-box">
-          <h4 class="title-section">Players Choice</h4>
+          <h3 class="title">Players Choice</h3>
           <button id="buttonRock" class="button button-choice" type="button" name="rock">Rock</button>
           <button id="buttonPaper" class="button button-choice" type="button" name="paper">Paper</button>
           <button id="buttonScissors" class="button button-choice" type="button" name="scissors">Scissors</button>
@@ -56,17 +56,22 @@
       </div>
 
       <div class="container-instructions hide">
-        <h3 class="title-section">Instructions</h3>
-        <p>This is where the instructions will be.</p>
-        <p>There will be multiple paragraphs.</p>
-        <p>And one more just to test things.</p>
+        <h3 class="title">Instructions</h3>
+        <p>This is a one-player game against the computer, that follows the classic rules of "Rock-Paper-Scissors".  Each round, the player and computer select one of the three hands. If there is a tie, there is no round winner, and the round is repeated.  If not a tie, then there is a round winner:</p>
+        <p>Rock beats Scissors,</p>
+        <p>Scissors beats Paper, and </p>
+        <p>Paper beats Rock</p>
+        <p>To begin, adjsut the number of rounds you would like to play (if needed), and then click "Start". The winner of the match is he who wins the majority of the rounds (eg: 3 out of 5 rounds).</p>
+        <p>Clicking on "Cancel" during a match will end the match, but will leave the current game statistics visible.  Clicking on "Start" during a match will clear all current game statistics and begin a new game.</p>
+        <p>At any time, you can click on "Instructions" to get help.   Click again on the "Instructions" button to hide the panel.</p>
+        <p>Enjoy Playing!</p>
 
       </div>
 
       <div class="container-gamelog red-box">
-        <h3 class="title-section">Match Log</h3>
+        <h3 class="title">Match Log</h3>
         <hr>
-        <div id="gameLog">
+        <div id="gameLog" class="game-log">
         </div>
       </div>
 

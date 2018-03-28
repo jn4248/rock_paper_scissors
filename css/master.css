@@ -1,25 +1,34 @@
 
 
 html, body {
-  background-color: grey;
+  background-color: black;
+  font-family: sans-serif;
 }
 
 * {
   box-sizing: border-box;
-  border: 2px solid lawngreen;
+  /* border: 2px solid lawngreen; */
 
 }
 
+/* Debuggin border */
+.red-box {
+  /* border: 2px solid red; */
+}
 
 .container-main {
+  /* background-image: url(/images/underwater1_reduced1_cropped1.jpg); */
+  background-image: url(/images/underwater1_reduced1_cropped2.jpg);
+  background-position: top center;
+  background-repeat: no-repeat;
   background-color: #4747d1;
   max-width: 35rem;
   min-width: 30rem;
-  padding: 0.75rem 3.5rem;
+  padding: 4rem 4rem;
   color: #e6e6ff;
-  margin: 3rem;
-  /* border-radius: 12.5rem; */
+  margin: 2rem;
   border-radius: 10% 10% 10% 10% / 50% 50% 50% 50%;
+  border: 5px solid silver;
 }
 
 .container-control {
@@ -60,46 +69,51 @@ html, body {
 }
 
 .scoreboard {
+  /* padding: 0.5rem; */
 }
 
 .scoreboard td {
-  padding: 0.2rem;
+  padding: 0.5rem;
+  font-size: 1.1rem;
   font-weight: bold;
 }
 
-.container-instructions {
-  background-color: lightblue;
-  height: 0;
-  -moz-transition: height 1s;
-  -webkit-transition: height 1s;
-  -ms-transition: height 1s;
-  -o-transition: height 1s;
-  transition: height 1s;
-}
-
-/* All elements on the instructions container div */
-.container-instructions * {
-  opacity: 0;
-  -webkit-transition: opacity 0.5s ease-in;
-  -moz-transition: opacity 0.5s ease-in;
-  -o-transition: opacity 0.5s ease-in;
-  -ms-transition: opacity 0.5s ease-in;
-  transition: opacity 0.5s ease-in;
-}
+/**
+  *   GAMELOG, AND CLASSES FOR GAMELOG LOG ELEMENTS
+  */
 
 .container-gamelog {
 }
 
 .container-gamelog p {
   font-size: .750rem;
+  margin: 0 0 0.5rem;
 }
 
-.gamelog {
-  max-height: 20rem;
+.game-log {
+  max-height: 30rem;
   overflow: auto;
 }
 
+.log-round-result {
+  color: yellow;
+  font-weight: 600;
+}
+
+
+.log-title {
+  color: #ffffff;
+  text-shadow: 3px 3px 3px #000000;
+  margin: 0.5rem 0 1rem;
+}
+
+/**
+  *   BUTTONS
+  */
+
 .button {
+  color: paleturquoise;
+  background-color: teal;
   font-size: 0.85rem;
   font-weight: bold;
   width: 5rem;
@@ -108,6 +122,13 @@ html, body {
   /* margin: 0.25rem 0; */
   border-radius: 1rem;
   /* border-radius: 1.2rem 1.2rem 1.2rem 1.2rem / 1rem 1rem 1rem 1rem; */
+  border: 2px solid silver;
+}
+
+.button:hover {
+  color: teal;
+  background-color: paleturquoise;
+  border: 2px solid dimgrey;
 }
 
 .button-start {
@@ -124,29 +145,65 @@ html, body {
 
 .button-choice {
   margin-top: 0.75rem;
+  color: teal;
+  background-color: paleturquoise;
+  border: 2px solid dimgrey;
 }
 
+.button-choice:hover {
+  /* color: paleturquoise; */
+  color: white;
+  background-color: teal;
+  border: 2px solid silver;
+}
 
-.title-section {
+.title {
+  font-family: serif;
   color: #ffffff;
-  text-shadow: 5px 5px 5px #000000;
+  text-shadow: 6px 6px 5px #000000;
   text-align: center;
   margin: 0 0 1rem;
 }
 
+.title-main {
+  margin: 0 0 2rem;
+}
+
+/**
+  *   INSTRUCTIONS CONTAINER (SLIDING/FADING)
+  */
+
+  .container-instructions {
+    /* background-color: lightblue; */
+    height: 0;
+    -moz-transition: height 1.5s;
+    -webkit-transition: height 1.5s;
+    -ms-transition: height 1.5s;
+    -o-transition: height 1.5s;
+    transition: height 1.5s;
+  }
+
+  /* All elements on the instructions container div */
+  .container-instructions * {
+    opacity: 0;
+    -webkit-transition: opacity 0.5s ease-out;
+    -moz-transition: opacity 0.5s ease-out;
+    -o-transition: opacity 0.5s ease-out;
+    -ms-transition: opacity 0.5s ease-out;
+    transition: opacity 0.5s ease-out;
+  }
 
 .hide {
   display: none;
 }
 
-.red-box {
-  /* border: 2px solid red; */
-}
 
 .slide-down {
-  height: 15rem;
+  height: 35rem;
 }
 
 .opacity-full {
   opacity: 1;
+  transition-duration: 2s;
+  transition-timing-function: ease-in;
 }

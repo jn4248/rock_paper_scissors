@@ -126,7 +126,7 @@ function toggleInstructions() {
     }
     container.classList.remove('slide-down');
     // set timer length to wait for transitions set in class "container-instructions" (should be slightly longer than longes transition)
-    window.setTimeout(function(){container.classList.add('hide');}, 2550);
+    window.setTimeout(function(){container.classList.add('hide');}, 1500);
   }
 }
 

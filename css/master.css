@@ -7,7 +7,7 @@ html, body {
 
 * {
   box-sizing: border-box;
-  /* border: 2px solid lawngreen; */
+  border: 2px solid lawngreen;
 }
 
 .container-main {
@@ -77,6 +77,7 @@ html, body {
   text-shadow: 6px 6px 5px black;
   text-align: center;
   margin: 0 0 0.75rem;
+  /* border: 1px solid yellow; */
 }
 
 .title-main {
@@ -155,7 +156,8 @@ html, body {
   */
 
 .container-instructions {
-  padding-bottom: 1rem;
+  /* border: 2px solid red; */
+  /* padding-bottom: 1rem; */
   height: 0;
   -moz-transition: height 1.5s;
   -webkit-transition: height 1.5s;

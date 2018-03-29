@@ -4,30 +4,30 @@ let playerScore = 0;
 let computerScore = 0;
 let roundsPerMatch = 3; // set default until user selects from menu
 let currentRound = 1;
-let gameOver = true;
+let matchOver = true;
 
 // button elements
 const roundSelectMenu = document.getElementById('selectRounds');
 const playerScoreBoard = document.getElementById('playerScoreBoard');
 const computerScoreBoard = document.getElementById('computerScoreBoard');
-const gameLog = document.getElementById('gameLog');
+const matchLog = document.getElementById('matchLog');
 
 /**
   *   EVENT LISTNERS
   *
   */
 
-// listener for "Start Game Button".
+// listener for "Start Match Button".
 const startButton = document.getElementById('buttonStart');
 startButton.addEventListener('click', function() {
-  if (gameOver) {
-    setTimeout(setNewGame(), 500);
+  if (matchOver) {
+    setTimeout(setNewMatch(), 500);
   } else {
     let restart = confirm("End current match to begin another?");
     if (restart == true) {
       displayHorizontalRule();
-      printToGameLog("Player has restarted a new match.");
-      setTimeout(function() {setNewGame()}, 2000);
+      printToMatchLog("Player has restarted a new match.");
+      setTimeout(function() {setNewMatch()}, 1000);
     }
   }
 });
@@ -35,12 +35,12 @@ startButton.addEventListener('click', function() {
 // listener for "Cancel Button".
 const cancelButton = document.getElementById('buttonCancel');
 cancelButton.addEventListener('click', function() {
-  if (!gameOver) {
+  if (!matchOver) {
     let cancel = confirm("Are you sure you want to end the match?");
     if (cancel == true) {
-      gameOver = true;
-      printToGameLog("Player has cancelled the match.");
-      gameEndMessage();
+      matchOver = true;
+      printToMatchLog("Player has cancelled the match.");
+      matchEndMessage();
     }
   } else {
     alert("No game currently being played");
@@ -69,32 +69,31 @@ instructionsButton.addEventListener('click', toggleInstructions);
   *
   */
 
-/*  (my own note on printToGameLog():
+/*  (my own note on printToMatchLog():
   Using the defaults, you can pass...
   1. Content only: defautl tag and classes apply.  )
   2. Content and Tag: default calles applies.
   3. Content, Tag, and Class.
   note: passing only tag, or only tag and class, will mess things up)
 */
-// add html element to the end of the gamelog
+// add html element to the end of the matchlog
 // default is a 'p' element, with no classes
 // classNames must be an array: eg. ['bold', 'container']
-function printToGameLog(content, tag = 'p', classNames = []) {
+function printToMatchLog(content, tag = 'p', classNames = []) {
   let elem = document.createElement(tag);
   elem.textContent = content;
-  // add classes
   if (classNames.length > 0) {
     elem.classList.add(...classNames);
   }
-  gameLog.appendChild(elem);
+  matchLog.appendChild(elem);
   // force scroll bar to bottom to show latest update
-  gameLog.scrollTop = gameLog.scrollHeight;
+  matchLog.scrollTop = matchLog.scrollHeight;
 }
 
 // section divider for clarity in console output
 function displayHorizontalRule() {
   horizontalLine = document.createElement('hr');
-  gameLog.appendChild(horizontalLine);
+  matchLog.appendChild(horizontalLine);
 }
 
 // returns string with first character capitalized,
@@ -105,7 +104,7 @@ function capitalizeFirstCharacter(string) {
   return firstChar + remainder;
 }
 
-// display the instructions panel
+// display the instructions panel (toggles in and out via sliding)
 function toggleInstructions() {
   let container = document.querySelector('.container-instructions');
   let items = container.children;
@@ -126,16 +125,16 @@ function toggleInstructions() {
       items[i].classList.remove('opacity-full');
     }
     container.classList.remove('slide-down');
-    // set timer length to wait for transitions set in class "container-instructions"
-    window.setTimeout(function(){container.classList.add('hide');}, 1550);
+    // set timer length to wait for transitions set in class "container-instructions" (should be slightly longer than longes transition)
+    window.setTimeout(function(){container.classList.add('hide');}, 2550);
   }
 }
 
-function gameEndMessage() {
+function matchEndMessage() {
   displayHorizontalRule();
-  printToGameLog("Thanks for playing!");
-  printToGameLog("Click the 'start' button to play again.");
-  printToGameLog("(If desired, adjust the number of rounds before clicking 'start')");
+  printToMatchLog("Thanks for playing!");
+  printToMatchLog("Click the 'start' button to play again.");
+  printToMatchLog("(If desired, adjust the number of rounds before clicking 'start')");
 }
 
 
@@ -158,26 +157,26 @@ function resetCurrentRound() {
   currentRound = 1;
 }
 
-// remove all child elements from the gamelog
-function clearGameLog() {
-  while (gameLog.hasChildNodes()) {
-    gameLog.removeChild(gameLog.lastChild);
+// remove all child elements from the matchlog
+function clearMatchLog() {
+  while (matchLog.hasChildNodes()) {
+    matchLog.removeChild(matchLog.lastChild);
   }
 }
 
-// Set and Reset variables and html for a new game
-function setNewGame() {
+// Set and Reset variables and html for a new match
+function setNewMatch() {
   resetCurrentRound();
   setRoundsPerMatch();
   resetScores();
   updateScoreBoard();
-  clearGameLog();
-  printToGameLog("Let's play a game of 'Rock Paper Scissors'.");
-  printToGameLog(`Best out of ${roundsPerMatch} rounds wins the match!`);
+  clearMatchLog();
+  printToMatchLog("Let's play a game of 'Rock Paper Scissors'.");
+  printToMatchLog(`Best out of ${roundsPerMatch} rounds wins the match!`);
   displayHorizontalRule();
-  printToGameLog(`Round ${currentRound}:`, 'h5', ['log-title']);
-  printToGameLog("Player's turn. Please select your hand:");
-  gameOver = false;
+  printToMatchLog(`Round ${currentRound}:`, 'h4', ['log-title']);
+  printToMatchLog("Player's turn. Please select your hand:");
+  matchOver = false;
 }
 
 // update the html scoreboard with the current score
@@ -270,31 +269,31 @@ function checkMatchWinnerStatus() {
 }
 
 // Main Game Controler:
-// Runs one round of a game (resulting in either a tie or win),
+// Runs one round of a match (resulting in either a tie or win),
 // and checks for a match winner
 function playRound(hand) {
-  // Only run if there is a game currently running
-  if (!gameOver) {
+  // Only run if there is a match currently running
+  if (!matchOver) {
     let playerChoice = hand;
     let computerChoice = selectComputerHand();
     let result = checkRoundResult(playerChoice, computerChoice);
-    printToGameLog(getRoundResultMessage(result, playerChoice, computerChoice), 'p', ['log-round-result']);
+    printToMatchLog(getRoundResultMessage(result, playerChoice, computerChoice), 'p', ['log-round-result']);
     updateScore(result);
     let matchWinner = checkMatchWinnerStatus();  // PLAYER, COMPUTER, or NONE
     if (matchWinner != "NONE") {
       // Match has a winner
       displayHorizontalRule();
-      printToGameLog(`Match Over...${matchWinner} Wins!`, 'h5', ['log-title']);
-      gameEndMessage();
-      gameOver = true;
+      printToMatchLog(`Match Over...${matchWinner} Wins!`, 'h4', ['log-title']);
+      matchEndMessage();
+      matchOver = true;
     } else {
       // NO match winner:  if not a tie, update and announce new round
       if (result == "PLAYER" || result == "COMPUTER") {
         currentRound++;
         displayHorizontalRule();
-        printToGameLog(`Round ${currentRound}:`, 'h5', ['log-title']);
+        printToMatchLog(`Round ${currentRound}:`, 'h4', ['log-title']);
       }
-      printToGameLog("Player's turn:");
+      printToMatchLog("Player's turn:");
     }
   }
 }

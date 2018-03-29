@@ -8,17 +8,15 @@
   </head>
 
   <body>
-    <div class="container-main red-box">
-
+    <div class="container-main">
       <h1 class="title title-main">Rock Paper Scissors</h1>
       <div class="container-control">
-
-        <div class="container-start control-item red-box">
+        <div class="container-start control-item">
           <button id="buttonStart" class="button button-start" type="button" name="start">Start</button>
           <button id="buttonCancel" class="button button-exit" type="button" name="cancel">Cancel</button>
         </div>
 
-        <div class="container-choicelist-rounds control-item red-box">
+        <div class="container-choicelist-rounds control-item">
           <span>Set number of rounds in the next match:</span>
           <select id="selectRounds" name="rounds">
             <option value="1">1</option>
@@ -32,8 +30,8 @@
       </div>
 
       <div class="container-control">
-        <div class="container-score control-item red-box">
-          <h3 class="title">Score</h3>
+        <div class="container-score control-item">
+          <h2 class="title">Score</h2>
           <table class="scoreboard">
             <tr>
               <td>Player:</td>
@@ -47,8 +45,8 @@
           <button id="buttonInstructions" class="button button-instructions" type="button" name="instructions">Instructions</button>
         </div>
 
-        <div class="container-choicelist-hand control-item red-box">
-          <h3 class="title">Players Choice</h3>
+        <div class="container-choicelist-hand control-item">
+          <h2 class="title">Players Choice</h2>
           <button id="buttonRock" class="button button-choice" type="button" name="rock">Rock</button>
           <button id="buttonPaper" class="button button-choice" type="button" name="paper">Paper</button>
           <button id="buttonScissors" class="button button-choice" type="button" name="scissors">Scissors</button>
@@ -56,7 +54,7 @@
       </div>
 
       <div class="container-instructions hide">
-        <h3 class="title">Instructions</h3>
+        <h2 class="title">Instructions</h2>
         <p>This is a one-player game against the computer, that follows the classic rules of "Rock-Paper-Scissors".  Each round, the player and computer select one of the three hands. If there is a tie, there is no round winner, and the round is repeated.  If not a tie, then there is a round winner:</p>
         <p>Rock beats Scissors,</p>
         <p>Scissors beats Paper, and </p>
@@ -65,16 +63,14 @@
         <p>Clicking on "Cancel" during a match will end the match, but will leave the current game statistics visible.  Clicking on "Start" during a match will clear all current game statistics and begin a new game.</p>
         <p>At any time, you can click on "Instructions" to get help.   Click again on the "Instructions" button to hide the panel.</p>
         <p>Enjoy Playing!</p>
-
       </div>
 
-      <div class="container-gamelog red-box">
+      <div class="container-matchlog">
         <h3 class="title">Match Log</h3>
         <hr>
-        <div id="gameLog" class="game-log">
+        <div id="matchLog" class="matchlog">
         </div>
       </div>
-
     </div>
     <script src="scripts/main.js"></script>
   </body>

@@ -8,23 +8,15 @@ html, body {
 * {
   box-sizing: border-box;
   /* border: 2px solid lawngreen; */
-
-}
-
-/* Debuggin border */
-.red-box {
-  /* border: 2px solid red; */
 }
 
 .container-main {
-  /* background-image: url(/images/underwater1_reduced1_cropped1.jpg); */
-  background-image: url(/images/underwater1_reduced1_cropped2.jpg);
+  background-image: url(/images/light_underwater.jpg);
   background-position: top center;
   background-repeat: no-repeat;
   background-color: #4747d1;
-  max-width: 35rem;
-  min-width: 30rem;
-  padding: 4rem 4rem;
+  width: 45rem;
+  padding: 3rem 3.5rem;
   color: #e6e6ff;
   margin: 2rem;
   border-radius: 10% 10% 10% 10% / 50% 50% 50% 50%;
@@ -32,7 +24,7 @@ html, body {
 }
 
 .container-control {
-  padding-bottom: 1.5em;
+  padding-bottom: 2em;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
@@ -41,7 +33,7 @@ html, body {
 }
 
 .control-item {
-  width: 13rem;
+  width: 16rem;
 }
 
 .container-start {
@@ -49,6 +41,18 @@ html, body {
   flex-flow: row nowrap;
   justify-content: space-around;
   align-items: center;
+}
+
+.container-choicelist-rounds {
+  font-size: 0.75rem;
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: stretch;
+  text-align: center;
+}
+
+.container-choicelist-rounds span {
+    padding: 0 2rem;
 }
 
 .container-score,
@@ -59,38 +63,40 @@ html, body {
   justify-content: space-between;
 }
 
-.container-choicelist-rounds {
-  font-size: 0.75rem;
-  display: flex;
-  flex-flow: row nowrap;
-  /* justify-content: space-between; */
-  align-items: stretch;
-  text-align: center;
-}
-
-.scoreboard {
-  /* padding: 0.5rem; */
-}
-
 .scoreboard td {
   padding: 0.5rem;
-  font-size: 1.1rem;
+  font-size: 1.2em;
   font-weight: bold;
+  text-shadow: 2px 2px 2px black;
+}
+
+.title {
+  font-size: 1.8em;
+  font-family: serif;
+  color: white;
+  text-shadow: 6px 6px 5px black;
+  text-align: center;
+  margin: 0 0 0.75rem;
+}
+
+.title-main {
+  font-size: 3em;
+  margin: 0 0 2rem;
 }
 
 /**
   *   GAMELOG, AND CLASSES FOR GAMELOG LOG ELEMENTS
   */
 
-.container-gamelog {
+.container-matchlog {
 }
 
-.container-gamelog p {
-  font-size: .750rem;
-  margin: 0 0 0.5rem;
+.container-matchlog p {
+  font-size: .750em;
+  margin: 0 0 0.4rem;
 }
 
-.game-log {
+.matchlog {
   max-height: 30rem;
   overflow: auto;
 }
@@ -100,11 +106,10 @@ html, body {
   font-weight: 600;
 }
 
-
 .log-title {
-  color: #ffffff;
-  text-shadow: 3px 3px 3px #000000;
-  margin: 0.5rem 0 1rem;
+  color: white;
+  text-shadow: 1px 1px 2px black;
+  margin: 0.75rem 0;
 }
 
 /**
@@ -112,30 +117,20 @@ html, body {
   */
 
 .button {
-  color: paleturquoise;
-  background-color: teal;
-  font-size: 0.85rem;
+  color: #ccffff;
+  background-color: #006666;
+  font-size: 0.85em;
   font-weight: bold;
   width: 5rem;
-  height: 1.75rem;
-  /* padding: 1rem 1rem; */
-  /* margin: 0.25rem 0; */
-  border-radius: 1rem;
-  /* border-radius: 1.2rem 1.2rem 1.2rem 1.2rem / 1rem 1rem 1rem 1rem; */
-  border: 2px solid silver;
+  height: 2rem;
+  border-radius: 1.2rem 1.2rem 1.2rem 1.2rem / 1rem 1rem 1rem 1rem;
+  border: 1px solid silver;
 }
 
 .button:hover {
   color: teal;
   background-color: paleturquoise;
-  border: 2px solid dimgrey;
-}
-
-.button-start {
-}
-
-.button-cancel {
-
+  border: 1px solid #006666;
 }
 
 .button-instructions {
@@ -144,54 +139,40 @@ html, body {
 }
 
 .button-choice {
-  margin-top: 0.75rem;
-  color: teal;
-  background-color: paleturquoise;
-  border: 2px solid dimgrey;
+  color: #006666;
+  background-color: #ccffff;
+  border: 1px solid #006666;
 }
 
 .button-choice:hover {
-  /* color: paleturquoise; */
-  color: white;
-  background-color: teal;
-  border: 2px solid silver;
-}
-
-.title {
-  font-family: serif;
-  color: #ffffff;
-  text-shadow: 6px 6px 5px #000000;
-  text-align: center;
-  margin: 0 0 1rem;
-}
-
-.title-main {
-  margin: 0 0 2rem;
+  color: #ccffff;
+  background-color: #006666;
+  border: 1px solid silver;
 }
 
 /**
   *   INSTRUCTIONS CONTAINER (SLIDING/FADING)
   */
 
-  .container-instructions {
-    /* background-color: lightblue; */
-    height: 0;
-    -moz-transition: height 1.5s;
-    -webkit-transition: height 1.5s;
-    -ms-transition: height 1.5s;
-    -o-transition: height 1.5s;
-    transition: height 1.5s;
-  }
+.container-instructions {
+  padding-bottom: 1rem;
+  height: 0;
+  -moz-transition: height 1.5s;
+  -webkit-transition: height 1.5s;
+  -ms-transition: height 1.5s;
+  -o-transition: height 1.5s;
+  transition: height 1.5s;
+}
 
-  /* All elements on the instructions container div */
-  .container-instructions * {
-    opacity: 0;
-    -webkit-transition: opacity 0.5s ease-out;
-    -moz-transition: opacity 0.5s ease-out;
-    -o-transition: opacity 0.5s ease-out;
-    -ms-transition: opacity 0.5s ease-out;
-    transition: opacity 0.5s ease-out;
-  }
+/* All elements on the instructions container div */
+.container-instructions * {
+  opacity: 0;
+  -webkit-transition: opacity 0.5s ease-out;
+  -moz-transition: opacity 0.5s ease-out;
+  -o-transition: opacity 0.5s ease-out;
+  -ms-transition: opacity 0.5s ease-out;
+  transition: opacity 0.5s ease-out;
+}
 
 .hide {
   display: none;
@@ -199,7 +180,7 @@ html, body {
 
 
 .slide-down {
-  height: 35rem;
+  height: 32rem;
 }
 
 .opacity-full {

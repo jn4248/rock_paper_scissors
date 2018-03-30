@@ -2,12 +2,12 @@
 
 html, body {
   background-color: black;
-  font-family: sans-serif;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 * {
   box-sizing: border-box;
-  border: 2px solid lawngreen;
+  /* border: 2px solid lawngreen; */
 }
 
 .container-main {
@@ -52,7 +52,8 @@ html, body {
 }
 
 .container-choicelist-rounds span {
-    padding: 0 2rem;
+  font-size: 1.2em;
+  padding: 0 2rem;
 }
 
 .container-score,
@@ -72,12 +73,11 @@ html, body {
 
 .title {
   font-size: 1.8em;
-  font-family: serif;
+  font-family: 'Times New Roman', Times, serif;
   color: white;
   text-shadow: 6px 6px 5px black;
   text-align: center;
   margin: 0 0 0.75rem;
-  /* border: 1px solid yellow; */
 }
 
 .title-main {
@@ -86,7 +86,7 @@ html, body {
 }
 
 /**
-  *   GAMELOG, AND CLASSES FOR GAMELOG LOG ELEMENTS
+  *   GAMELOG, AND CLASSES FOR MATCHLOG LOG ELEMENTS
   */
 
 .container-matchlog {
@@ -109,6 +109,7 @@ html, body {
 
 .log-title {
   color: white;
+  font-family: 'Times New Roman', Times, serif;
   text-shadow: 1px 1px 2px black;
   margin: 0.75rem 0;
 }
@@ -156,8 +157,6 @@ html, body {
   */
 
 .container-instructions {
-  /* border: 2px solid red; */
-  /* padding-bottom: 1rem; */
   height: 0;
   -moz-transition: height 1.5s;
   -webkit-transition: height 1.5s;
@@ -167,7 +166,7 @@ html, body {
 }
 
 /* All elements on the instructions container div */
-.container-instructions * {
+.instructions-content {
   opacity: 0;
   -webkit-transition: opacity 0.5s ease-out;
   -moz-transition: opacity 0.5s ease-out;

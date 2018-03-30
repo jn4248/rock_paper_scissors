@@ -17,7 +17,7 @@ const matchLog = document.getElementById('matchLog');
   *
   */
 
-// listener for "Start Match Button".
+// listener for "Start Button".
 const startButton = document.getElementById('buttonStart');
 startButton.addEventListener('click', function() {
   if (matchOver) {
@@ -61,7 +61,31 @@ scissorsButton.addEventListener('click', playRound.bind(null, "SCISSORS"));
 
 // listener for "Instructions Button"
 const instructionsButton = document.getElementById('buttonInstructions');
-instructionsButton.addEventListener('click', toggleInstructions);
+instructionsButton.addEventListener('click', handleToggleInstructionsEvent);
+
+// intitates transitions for the instruction panel, and removes the button listener
+function handleToggleInstructionsEvent(e) {
+  instructionsButton.removeEventListener('click', handleToggleInstructionsEvent);
+  toggleInstructions();
+}
+
+// Listener to disable and re-enable the instructions button
+const instructionsContainer = document.getElementById('instructionsContainer');
+instructionsContainer.addEventListener('transitionend', restoreInstructionsButton);
+
+// Restores functionality to the "instructions" button after the transition to
+// open/close the  panel finishes, by adding the listener that was removed
+// in "handleTogclass().
+// Responds to the height transition, which is part of the instrucitons
+// container. If panel is now closed (just closed), then it also "hides" the panel.
+function restoreInstructionsButton(e) {
+  if (e.propertyName == 'height') {
+    if (instructionsContainer.dataset.displaystatus == "closed") {
+      instructionsContainer.classList.add('hide');
+    }
+    instructionsButton.addEventListener('click', handleToggleInstructionsEvent);
+  }
+}
 
 
 /**
@@ -76,8 +100,9 @@ instructionsButton.addEventListener('click', toggleInstructions);
   3. Content, Tag, and Class.
   note: passing only tag, or only tag and class, will mess things up)
 */
-// add html element to the end of the matchlog
-// default is a 'p' element, with no classes
+
+// add html element to the end of the matchlog.
+// default is a 'p' element, with no classes.
 // classNames must be an array: eg. ['bold', 'container']
 function printToMatchLog(content, tag = 'p', classNames = []) {
   let elem = document.createElement(tag);
@@ -90,7 +115,7 @@ function printToMatchLog(content, tag = 'p', classNames = []) {
   matchLog.scrollTop = matchLog.scrollHeight;
 }
 
-// section divider for clarity in console output
+// Adds a horizontal divider to end of matchlog, for clarity
 function displayHorizontalRule() {
   horizontalLine = document.createElement('hr');
   matchLog.appendChild(horizontalLine);
@@ -106,30 +131,29 @@ function capitalizeFirstCharacter(string) {
 
 // display the instructions panel (toggles in and out via sliding)
 function toggleInstructions() {
-  let container = document.querySelector('.container-instructions');
-  let items = container.children;
-  let hidden = container.classList.contains('hide');
-  if (hidden) {
-    // show instructions
-    container.classList.remove('hide');
-    // wrap class changes in setTimeout(), because they occur just after changing from a state of display:none (class 'hide')
+  let items = instructionsContainer.children;
+  if (instructionsContainer.dataset.displaystatus == "closed") {
+    // 'open' instructions
+    instructionsContainer.classList.remove('hide');
+    // wrap class changes in setTimeout(), to allow class change (hide) to occur
     window.setTimeout(function(){
-      container.classList.add('slide-down');
+      instructionsContainer.classList.add('slide-down');
       for (let i=0; i < items.length; i++) {
         items[i].classList.add('opacity-full');
       }
     }, 10);
+    instructionsContainer.dataset.displaystatus = "open";
   } else {
-    // remove/hide instructions
+    // 'close' instructions
     for (let i=0; i < items.length; i++) {
       items[i].classList.remove('opacity-full');
     }
-    container.classList.remove('slide-down');
-    // set timer length to wait for transitions set in class "container-instructions" (should be slightly longer than longes transition)
-    window.setTimeout(function(){container.classList.add('hide');}, 1500);
+    instructionsContainer.classList.remove('slide-down');
+    instructionsContainer.dataset.displaystatus = "closed";
   }
 }
 
+// displays closing message to the match, added to end of the matchlog
 function matchEndMessage() {
   displayHorizontalRule();
   printToMatchLog("Thanks for playing!");
@@ -143,7 +167,6 @@ function matchEndMessage() {
   *
   */
 
-// set the number of rounds per match, from the html select menu
 function setRoundsPerMatch() {
   roundsPerMatch = roundSelectMenu.value;
 }
@@ -185,7 +208,7 @@ function updateScoreBoard() {
   computerScoreBoard.textContent = computerScore;
 }
 
-// update scores if the round result is a winner (player or computer)
+// update scores, and scoreboard, if the round result is a winner (player or computer)
 // Will function as long as "result" is a string (eg: "TIE", "OTHER"...)
 function updateScore(result) {
   if (result == "PLAYER") {
@@ -202,8 +225,8 @@ function updateScore(result) {
   *
   */
 
-// Randomly return one of three play choices for the computer.
-function selectComputerHand() {
+// Randomly return one of three play choices.
+function selectRandomHand() {
   let randomToHundred = Math.floor((Math.random() * 100) + 1); // 1 through 100
   if (randomToHundred <= 33) {
    return "ROCK";
@@ -272,10 +295,10 @@ function checkMatchWinnerStatus() {
 // Runs one round of a match (resulting in either a tie or win),
 // and checks for a match winner
 function playRound(hand) {
-  // Only run if there is a match currently running
+  // Only runs if a match is already started
   if (!matchOver) {
     let playerChoice = hand;
-    let computerChoice = selectComputerHand();
+    let computerChoice = selectRandomHand();
     let result = checkRoundResult(playerChoice, computerChoice);
     printToMatchLog(getRoundResultMessage(result, playerChoice, computerChoice), 'p', ['log-round-result']);
     updateScore(result);

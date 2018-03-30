@@ -7,11 +7,10 @@ html, body {
 
 * {
   box-sizing: border-box;
-  /* border: 2px solid lawngreen; */
 }
 
 .container-main {
-  background-image: url(/images/light_underwater.jpg);
+  background-image: url("../images/light_underwater.jpg");
   background-position: top center;
   background-repeat: no-repeat;
   background-color: #4747d1;
